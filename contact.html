@@ -1,0 +1,115 @@
+<html>
+<head>
+<title> contact form application </title> 
+<meta charset=UFT-8">
+<link herf="mystyle.css" rel="stylesheet"/>
+
+<script>
+
+var studentsArray=[];
+
+function init(){
+document.getElementById("tablerows").innerHTML="";
+if(localstorage.studentsRecord){
+studentsArray=JSON.parse(localstorage.studentRecord);
+for(var i=0; i< studentArray.length;i++){
+preparetablecell(studentsArray[i].firstname,studentArray[i].lastname,studentsArray)
+}
+}
+}
+function onRegisteredpressed(){
+  
+  var firstName = document.getElementById("firstname").value;
+  var lastName = document.getElementById("lastname").value;
+  var rollNumber = document.getElementById("rollnumber").value;
+  var subject = document.getElementById("subject").value;
+ 
+  varstuObj={firstname:firstname,lastname:lastname,rollnumber:rollnumber,subject:subject}
+  studentsArray.push(stuObj);
+
+localstorage.studentRecord=JSON.stringfy(studentsArray);
+
+init();
+
+   document.getElementById("firstname").value ="";
+   document.getElementById("lastname").value ="";
+   document.getElementById("rollnum").value ="";
+
+  }
+ 
+ function prepareTableCell(firstname,lastname,rollnumber,subject) {
+    
+  var table = document.getElementById("regtable");
+  var row = table.insertRow();
+  var firstNameCell = row.insertCell(0);
+  var lastNameCell = row.insertCell(1);
+  var rollnumCell = row.insertCell(2);
+  var subjectCell = row.insertCell(3);
+  var actionCell = row.insertCell(4); 
+  
+  firstNameCell.innerHTML = firstName;
+  lastNameCell.innerHTML = lastName;
+  rollNumCell.innerHTML = rollNum;
+  subjectCell.innerHTML = subject;
+  actionCell.innerHTML ='<button>Edit</button><br/><button>Delete</button>';
+
+  } 
+
+
+</script>
+</head>
+<body onload="init()">
+ <div class="container">
+  <header class="headerbar top"><h1>Registration</h1></header>
+   <aside class="leftbar">
+<div>
+<fieldset>
+  <label for="firstname"><span>First Name</span></label>
+  <input type="text" placeholder="enter first name" id="firstname">
+</fieldset> 
+       
+<fieldset>
+  <label for="lastname">last Name</label>
+  <input type="text" placeholder="enter first name" id="lastname">
+</fieldset> 
+       
+<fieldset>
+  <label for="rollnumber">roll number</label>
+  <input type="text" placeholder="enter roll number" id="rollnumber">
+</fieldset> 
+
+<fieldset>
+  <label for="subject">Subject</label>
+  <select id="subject">
+      <option value="Math">Math</option> 
+      <option value="Physics">physics</option>        
+      <option value="Chemistry">Chemistry</option> 
+      <option value="English">English</option>
+      <option value="Tamil">Tamil</option>
+    </select>
+  </fieldset>
+  <fieldset>
+     <label for="submit">&nbsp;</label>
+     <button id="submit" onclick="onRegisterPressed()">Register</button>
+    </fieldset>
+  </div>
+</aside>
+<aside class="rightbar">
+<table id="regtable">
+<thead>
+<tr>
+     <th>First Name</th> 
+     <th>Last Name</th> 
+     <th>Roll Number</th>
+     <th>Subject</th>  
+     <th>Action</th>  
+  </tr>
+ </thead>
+ <tbody>
+<tbody>
+</table>
+</aside>
+<footer class="headerbar bottom"></footer>
+</div>
+</body>
+</html>
